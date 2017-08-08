@@ -43,6 +43,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8080);	// listen to port 8080
+var ipAddr = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+app.listen(port, ipAddr, function(){
+	console.log(`App listening on port ${port}`);
+});	// listen to port 8080
 
 module.exports = app;
